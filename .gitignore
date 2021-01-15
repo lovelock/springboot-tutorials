@@ -1,0 +1,13 @@
+.idea
+target
+**/.DS_Store
+**/*.log
+**/*.gz
+bin/
+dependency-reduced-pom.xml
+!/app.log
+**/*.iml
+
+**/.mvn
+**/mvnw
+**/mvnw.cmd
