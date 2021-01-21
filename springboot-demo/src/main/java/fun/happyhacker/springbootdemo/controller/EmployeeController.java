@@ -1,6 +1,8 @@
 package fun.happyhacker.springbootdemo.controller;
 
 import fun.happyhacker.springbootdemo.hikari.Employee;
+import fun.happyhacker.springbootdemo.hikari.ExtensionMethods;
+import lombok.experimental.ExtensionMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +14,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@ExtensionMethod({ExtensionMethods.class})
 public class EmployeeController {
     @Autowired
     private DataSource ds;
@@ -36,6 +40,10 @@ public class EmployeeController {
             throwables.printStackTrace();
         }
 
-        return employees.toString();
+        List<String> empStrList = employees.stream()
+                .map(e -> e.toJson())
+                .collect(Collectors.toList());
+
+        return empStrList.toString();
     }
 }
