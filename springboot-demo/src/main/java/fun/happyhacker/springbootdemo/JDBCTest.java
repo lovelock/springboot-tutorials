@@ -51,6 +51,7 @@ public class JDBCTest {
                 System.out.println("delete failed");
             }
 
+            rs.close();
             stmt.close();
             connection.close();
         } catch (SQLException | ClassNotFoundException e) {
