@@ -1,4 +1,4 @@
-package fun.happyhacker.springbootdemo;
+package fun.happyhacker.springbootdemo.jdbc;
 
 import java.sql.*;
 
@@ -9,12 +9,11 @@ public class JDBCTest {
     }
 
     private static void jdbcTest() {
-        Connection connection = null;
         Statement stmt = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/happyhacker", "root", "12345678");
+            Connection connection = JDBCConnection.getConnection();
             stmt = connection.createStatement();
             String selectSql = "select * from employee";
             ResultSet rs = stmt.executeQuery(selectSql);
@@ -64,14 +63,6 @@ public class JDBCTest {
                     throwables.printStackTrace();
                 }
             }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-
         }
     }
 }
