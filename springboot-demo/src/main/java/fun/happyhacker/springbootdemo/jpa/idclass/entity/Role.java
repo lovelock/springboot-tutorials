@@ -1,4 +1,4 @@
-package fun.happyhacker.springbootdemo.jpa.entity;
+package fun.happyhacker.springbootdemo.jpa.idclass.entity;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Role {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
+
     private String name;
-    private String note;
 }
