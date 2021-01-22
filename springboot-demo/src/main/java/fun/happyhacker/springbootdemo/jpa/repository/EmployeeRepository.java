@@ -1,7 +1,6 @@
 package fun.happyhacker.springbootdemo.jpa.repository;
 
 import fun.happyhacker.springbootdemo.jpa.entity.Employee;
-import fun.happyhacker.springbootdemo.jpa.entity.RoleEmployeeId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
