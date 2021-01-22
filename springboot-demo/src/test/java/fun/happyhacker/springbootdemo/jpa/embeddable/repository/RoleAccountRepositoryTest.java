@@ -1,8 +1,9 @@
-package fun.happyhacker.springbootdemo.jpa.idclass.repository;
+package fun.happyhacker.springbootdemo.jpa.embeddable.repository;
 
-import fun.happyhacker.springbootdemo.jpa.idclass.entity.Account;
-import fun.happyhacker.springbootdemo.jpa.idclass.entity.Role;
-import fun.happyhacker.springbootdemo.jpa.idclass.entity.RoleAccount;
+import fun.happyhacker.springbootdemo.jpa.embeddable.entity.Account;
+import fun.happyhacker.springbootdemo.jpa.embeddable.entity.Role;
+import fun.happyhacker.springbootdemo.jpa.embeddable.entity.RoleAccount;
+import fun.happyhacker.springbootdemo.jpa.embeddable.entity.RoleAccountId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,8 +46,10 @@ class RoleAccountRepositoryTest {
         accountRepository.save(john);
 
         RoleAccount roleAccount = new RoleAccount();
-        roleAccount.setRoleId(admin.getId());
-        roleAccount.setAccountId(john.getId());
+        RoleAccountId roleAccountId = new RoleAccountId();
+        roleAccountId.setRoleId(admin.getId());
+        roleAccountId.setAccountId(john.getId());
+        roleAccount.setRoleAccountId(roleAccountId);
 
         roleAccountRepository.save(roleAccount);
     }

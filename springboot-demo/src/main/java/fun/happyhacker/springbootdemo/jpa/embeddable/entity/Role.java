@@ -1,4 +1,4 @@
-package fun.happyhacker.springbootdemo.jpa.idclass.entity;
+package fun.happyhacker.springbootdemo.jpa.embeddable.entity;
 
 import lombok.Data;
 
