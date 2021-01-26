@@ -1,0 +1,35 @@
+package fun.happyhacker.springbootdemo.mybatis.dataobject;
+
+import fun.happyhacker.springbootdemo.mybatis.mapper.OrderMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+@SpringBootTest
+class OrderConfigDOTest {
+    @Autowired
+    private OrderMapper orderMapper;
+
+    @Test
+    void testSelectById() {
+        OrderDO orderDO = orderMapper.selectById(1);
+        System.out.println(orderDO);
+    }
+
+    @Test
+    void testSelectListByUserId() {
+        List<OrderDO> orders = orderMapper.selectListByUserId(1);
+        System.out.println(orders.size());
+    }
+
+    @Test
+    void testInsert() {
+        OrderDO order = new OrderDO();
+        order.setUserId(1);
+        orderMapper.insert(order);
+    }
+
+
+}
