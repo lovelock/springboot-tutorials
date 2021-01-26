@@ -1,0 +1,66 @@
+spring:
+  datasource:
+    dynamic:
+      hikari:
+        connection-timeout: 5000
+        leak-detection-threshold: 5000
+        max-lifetime: 30000
+      primary: account_master
+      strict: false
+      datasource:
+        account_master:
+          url: jdbc:mysql://192.168.99.101:3306/account
+          username: account
+          password: account!
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        account_slave:
+          url: jdbc:mysql://192.168.99.101:3307/account
+          username: account_r
+          password: account!
+          driver-class-name: com.mysql.cj.jdbc.Driver
+
+        order_master:
+          url: jdbc:mysql://192.168.99.101:3308/order
+          username: order
+          password: order!
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        order_slave:
+          url: jdbc:mysql://192.168.99.101:3309/order
+          username: order_r
+          password: order_r!
+          driver-class-name: com.mysql.cj.jdbc.Driver
+  shardingsphere:
+    datasource:
+      names: order-master
+      order-master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.99.101:3308/order
+        username: order
+        password: order!
+      order-slave:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.99.101:3309/order
+        username: order_r
+        password: order_r!
+#      masterslave:
+#        name: ms
+#        load-balance-algorithm-type: round_robin
+#        master-data-source-name: ordermaster
+#        slave-data-source-name: orderslave
+      sharding:
+        tables:
+          order:
+            actualDataNodes: order-master.order_$->{001..002}
+            table-strategy:
+              inline:
+                sharding-column: id
+                algorithm-expression: order_$->{id % 100}
+              keyGenerator:
+                type: SNOWFLAKE
+                column: id
+      props:
+        sql:
+          show: true
+
