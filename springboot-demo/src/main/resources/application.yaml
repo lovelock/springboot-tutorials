@@ -4,41 +4,41 @@ spring:
       sql:
         show: true
     datasource:
-      names: ds-orders-0, ds-orders-1
-      ds-orders-0:
+      names: ds-master, ds-slave-0, ds-slave-1
+      ds-master:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://192.168.99.101:3306/orders_0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: root
         password: root
-      ds-orders-1:
+      ds-slave-0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.99.101:3306/orders_0?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: root
+      ds-slave-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://192.168.99.101:3307/orders_1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
         username: root
         password: root
-    sharding:
-      tables:
-        order_config:
-          actualDataNodes: ds-orders-0.order_config
-        orders:
-          actualDataNodes: ds-orders-0.orders_$->{[0,2,4,6]}, ds-orders-1.orders_$->{[1,3,5,7]} # 映射到 ds-orders-0 和 ds-orders-1 数据源的 orders 表们
-          keyGenerator: # 主键生成策略
-            column: id
-            type: SNOWFLAKE
-          databaseStrategy:
-            inline:
-              algorithmExpression: ds-orders-$->{user_id % 2}
-              shardingColumn: user_id
-          tableStrategy:
-            inline:
-              algorithmExpression: orders_$->{user_id % 8}
-              shardingColumn: user_id
+    masterslave:
+      load-balance-algorithm-type: round_robin
+      slave-data-source-names: ds-slave-0, ds-slave-1
+      master-data-source-name: ds-master
+      name: ms
 
 # mybatis 配置内容
-mybatis:
-  config-location: classpath:mybatis-config.xml # 配置 MyBatis 配置文件路径
-  mapper-locations: classpath:mapper/*.xml # 配置 Mapper XML 地址
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: none
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+  mapper-locations: classpath*:mapper/*.xml # 配置 Mapper XML 地址
   type-aliases-package: fun.happyhacker.springbootdemo.mybatis.dataobject
 
 logging:
