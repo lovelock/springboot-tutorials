@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.util.Scanner;
 
@@ -22,16 +23,18 @@ public class CodeGenerator {
         mpg.setGlobalConfig(gc);
 
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.99.101:3308/order?charset=utf8mb4");
+        dsc.setUrl("jdbc:mysql://192.168.99.101:3306/account?charset=utf8mb4");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("order");
-        dsc.setPassword("order!");
+        dsc.setUsername("root");
+        dsc.setPassword("root");
         mpg.setDataSource(dsc);
 
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("模块名"));
         pc.setParent("fun.happyhacker.springbootdemo.mybatis");
         mpg.setPackageInfo(pc);
+
+        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
 
 //        InjectionConfig cfg = new InjectionConfig() {
 //            @Override
