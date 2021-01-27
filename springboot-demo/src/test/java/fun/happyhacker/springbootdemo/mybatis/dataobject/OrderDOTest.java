@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-class OrderConfigDOTest {
+class OrderDOTest {
     @Autowired
     private OrderMapper orderMapper;
 
