@@ -1,6 +1,26 @@
 server:
   port: 8080
 spring:
+  redis:
+    database: 0
+    host: 192.168.99.101
+    port: 6379
+    password:
+    connect-timeout: 6000
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    client-type: jedis
   shardingsphere:
     datasource:
       names: master0, master1, slave0, slave1
