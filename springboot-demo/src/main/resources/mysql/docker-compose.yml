@@ -1,0 +1,54 @@
+version: "3.3"
+services:
+
+  db-3306:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - "3306:/var/lib/mysql:rw"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "root"
+
+
+  db-3307:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - "3307:/var/lib/mysql:rw"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "root"
+
+  db-3308:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3308:3306"
+    volumes:
+      - "3308:/var/lib/mysql:rw"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "root"
+
+  db-3309:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3309:3306"
+    volumes:
+      - "3309:/var/lib/mysql:rw"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "root"
+
+volumes:
+  "3306":
+  "3307":
+  "3308":
+  "3309":
+
