@@ -1,6 +1,7 @@
 package fun.happyhacker.springbootdemo;
 
 import fun.happyhacker.redis.RedisPlanetConfigurationProperties;
+import fun.happyhacker.redis.RedisPlanetUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -32,12 +33,14 @@ public class RedisConfiguration implements EnvironmentAware {
         String prefix = "spring.redisplanet.";
         for (String each : getRedisNodes(environment, prefix)) {
             log.info("each {}", each);
-            redisPropertiesMap.put(each, getRedisNode(environment, prefix, each));
+            RedisProperties props = getRedisNode(environment, prefix, each);
+            log.info("redis properties {}:{}", props.getHost(), props.getPort());
+            redisPropertiesMap.put(each, props);
         }
     }
 
     private RedisProperties getRedisNode(final Environment environment, final String prefix, final String nodeName) {
-        return PropertyUtil.handle(environment, prefix + nodeName.trim(), RedisProperties.class);
+        return RedisPlanetUtil.getRedisPlanet(environment, prefix, nodeName).getProperties();
     }
 
     private List<String> getRedisNodes(final Environment environment, final String prefix) {

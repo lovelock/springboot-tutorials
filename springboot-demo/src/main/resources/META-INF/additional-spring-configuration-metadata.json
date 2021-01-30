@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "spring.redisplanet",
+      "type": "java.util.Map<java.lang.String, org.springframework.boot.autoconfigure.data.redis.RedisProperties>",
+      "sourceType": "fun.happyhacker.redis.RedisPlanetUtil",
+      "description": "dkfajsdk"
+    }
+  ] }
