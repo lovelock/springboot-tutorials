@@ -1,24 +1,29 @@
 package fun.happyhacker.springbootdemo.redis;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class RedisTest {
 
 //    @Autowired
-//    @Qualifier("jedisTemplate")
-//    private RedisTemplate<String, Serializable> jedisTemplate;
+//    @Qualifier("r2RedisTemplate")
+//    private RedisTemplate<String, Object> redisTemplate;
 
-//    @Autowired
-//    @Qualifier("lettuceTemplate")
-//    private RedisTemplate<String, Serializable> lettuceTemplate;
+    @Autowired
+    private ApplicationContext context;
 
     @Test
     void testSingleJedis() {
-//        jedisTemplate.opsForValue().set("foo", "bar");
-//        String value = (String) jedisTemplate.opsForValue().get("foo");
-//        assertEquals("bar", value);
+        RedisTemplate<String, Object> redisTemplate  = context.getBean("r2RedisTemplate", RedisTemplate.class);
+        redisTemplate.opsForValue().set("foo2", "bar");
+        String value = (String) redisTemplate.opsForValue().get("foo2");
+        assertEquals("bar", value);
     }
 
 //    @Test
