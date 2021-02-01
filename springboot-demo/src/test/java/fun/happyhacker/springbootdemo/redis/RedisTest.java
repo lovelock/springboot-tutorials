@@ -14,8 +14,6 @@ import org.springframework.data.redis.connection.lettuce.LettucePoolingClientCon
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @SpringBootTest
 @Log4j2
 public class RedisTest {
@@ -90,13 +88,4 @@ public class RedisTest {
             }).start();
         }
     }
-
-    @Test
-    void testMulti() {
-
-        redis6379master.opsForValue().set("master", "value");
-
-        assertEquals("value", redis6379master.opsForValue().get("master"));
-    }
-
 }
