@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+
+  memcache-11211:
+    image: memcached
+    ports:
+      - "11211:11211"
+
+  memcache-11212:
+    image: memcached
+    ports:
+      - "11212:11211"

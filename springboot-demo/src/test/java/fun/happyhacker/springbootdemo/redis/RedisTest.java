@@ -3,7 +3,6 @@ package fun.happyhacker.springbootdemo.redis;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
@@ -17,20 +16,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @SpringBootTest
 @Log4j2
 public class RedisTest {
-
-//    @Autowired
-//    private ApplicationContext context;
-//
-//    @Test
-//    void testSingleJedis() {
-//        RedisTemplate<String, Object> redisTemplate  = context.getBean("r2RedisTemplate", RedisTemplate.class);
-//        redisTemplate.opsForValue().set("foo2", "bar");
-//        String value = (String) redisTemplate.opsForValue().get("foo2");
-//        assertEquals("bar", value);
-//    }
-
-    @Autowired
-    private RedisTemplate<String, Object> redis6379master;
 
     @Test
     void initJedis() {

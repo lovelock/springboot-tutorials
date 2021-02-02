@@ -1,13 +1,16 @@
 server:
   port: 8080
 spring:
+  memcache:
+    nodes:
+      mc11211: "local-docker:11211"
+      mc11212: "local-docker:11212"
   redisplanet:
     nodes: r1, r2
     r1:
       database: 0
       host: local-docker
       port: 6379
-      password:
       connect-timeout: 6000
       timeout: 6000
       jedis:
